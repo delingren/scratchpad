@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E6406EE21CA2A9A00A4FEEF /* FirebaseAuthSandbox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirebaseAuthSandbox.entitlements; sourceTree = "<group>"; };
 		1E98290821C8977D00CB5A86 /* FirebaseAuthSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseAuthSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E98290B21C8977D00CB5A86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E98290D21C8977D00CB5A86 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		1E98290A21C8977D00CB5A86 /* FirebaseAuthSandbox */ = {
 			isa = PBXGroup;
 			children = (
+				1E6406EE21CA2A9A00A4FEEF /* FirebaseAuthSandbox.entitlements */,
 				1E98290B21C8977D00CB5A86 /* AppDelegate.swift */,
 				1E98290D21C8977D00CB5A86 /* ViewController.swift */,
 				1E98290F21C8977D00CB5A86 /* Main.storyboard */,
@@ -126,6 +128,14 @@
 				TargetAttributes = {
 					1E98290721C8977D00CB5A86 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -427,7 +437,9 @@
 			baseConfigurationReference = 4FC0CC9A6F4DF200829A2200 /* Pods-FirebaseAuthSandbox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FirebaseAuthSandbox/FirebaseAuthSandbox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QFP2RZ8L7U;
 				INFOPLIST_FILE = FirebaseAuthSandbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,7 +457,9 @@
 			baseConfigurationReference = E2A5586DAF8286A0C3124205 /* Pods-FirebaseAuthSandbox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FirebaseAuthSandbox/FirebaseAuthSandbox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QFP2RZ8L7U;
 				INFOPLIST_FILE = FirebaseAuthSandbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
