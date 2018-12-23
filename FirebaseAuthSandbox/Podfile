@@ -6,6 +6,10 @@ target 'FirebaseAuthSandbox' do
   use_frameworks!
 
   # Pods for FirebaseAuthSandbox
+  pod 'FacebookLogin'
+  pod 'FBSDKCoreKit', '4.38.1'
+  pod 'FBSDKLoginKit', '4.38.1'
+
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'FirebaseUI'

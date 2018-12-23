@@ -11,14 +11,15 @@ import Firebase
 import FirebaseUI
 
 class ViewController: UIViewController, FUIAuthDelegate {
-
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userEmail: UILabel!
+    
     var auth: Auth?
     var authUI: FUIAuth?
     let providers: [FUIAuthProvider] = [
         FUIGoogleAuth(),
         FUIFacebookAuth(),
         ]
-    
     var handle: AuthStateDidChangeListenerHandle?
     
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class ViewController: UIViewController, FUIAuthDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        updateUserInfo(user: auth?.currentUser)
         handle = auth!.addStateDidChangeListener { (auth, user) in
             guard user != nil else {
                 self.loginAction(sender: self)
@@ -42,9 +44,6 @@ class ViewController: UIViewController, FUIAuthDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         auth!.removeStateDidChangeListener(handle!)
-    }
-    
-    @IBAction func loginPressed(_ sender: Any) {
     }
     
     @IBAction func loginAction(sender: AnyObject) {
@@ -64,6 +63,11 @@ class ViewController: UIViewController, FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         guard let authError = error else {
             print("Signed in: \(user!)")
+            print("User name: \(user?.displayName ?? "unnamed")")
+            print("Email: \(user?.email ?? "no email")")
+            updateUserInfo(user: user)
+            //userName.text = user?.displayName
+            //userEmail.text = user?.email
             return
         }
         
@@ -77,6 +81,13 @@ class ViewController: UIViewController, FUIAuthDelegate {
         default:
             let detailedError = (authError as NSError).userInfo[NSUnderlyingErrorKey] ?? authError
             print("Login error: \((detailedError as! NSError).localizedDescription)");
+        }
+    }
+    
+    func updateUserInfo(user: User?) {
+        if (user != nil) {
+            userName.text = user!.displayName
+            userEmail.text = user!.email
         }
     }
 }
