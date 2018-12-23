@@ -1,7 +1,0 @@
-target 'FirebaseUI-demo-swift' do
-  use_frameworks!
-
-  pod 'Firebase'
-  pod 'FirebaseUI', :git => 'https://github.com/firebase/FirebaseUI-iOS.git'
-
-end
