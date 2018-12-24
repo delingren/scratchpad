@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bXN-qG-6KB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -63,7 +63,7 @@
         <!--Auth View Controller-->
         <scene sceneID="Mw5-PV-n3s">
             <objects>
-                <viewController title="Auth View Controller" id="bXN-qG-6KB" customClass="AuthViewController" customModule="FirebaseAuthSandbox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" title="Auth View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bXN-qG-6KB" customClass="AuthViewController" customModule="FirebaseAuthSandbox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="inE-oq-82I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,19 +94,43 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-6A-wgp">
-                                <rect key="frame" x="16" y="203" width="343" height="86"/>
+                                <rect key="frame" x="16" y="185" width="343" height="86"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="OzP-ZZ-nF0" kind="embed" id="zFu-27-VqC"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8NB-cQ-sOK">
-                                <rect key="frame" x="16" y="203" width="343" height="86"/>
+                                <rect key="frame" x="16" y="185" width="343" height="86"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="Vj2-jJ-Ed5" kind="embed" id="EPt-Rv-oO4"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0h-Z1-uYE">
+                                <rect key="frame" x="86" y="514" width="202" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="SignIn with Facebook" image="ic_facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="facebookSignIn:" destination="bXN-qG-6KB" eventType="touchUpInside" id="oNl-xQ-TTn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-5D-V1Z">
+                                <rect key="frame" x="86" y="561" width="202" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="SignIn with Google" image="ic_google">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="googleSignIn:" destination="bXN-qG-6KB" eventType="touchUpInside" id="CI0-4d-rro"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="43f-08-k0b"/>
@@ -115,7 +139,7 @@
                         <outlet property="emailText" destination="fQ4-by-Gj4" id="Ji4-38-S6v"/>
                         <outlet property="logInSignUp" destination="UGM-0R-czz" id="PG2-xK-bnb"/>
                         <outlet property="logInView" destination="KT6-6A-wgp" id="zor-oC-1jA"/>
-                        <outlet property="passwordField" destination="tYS-FN-iph" id="G31-r4-fnK"/>
+                        <outlet property="passwordText" destination="tYS-FN-iph" id="G31-r4-fnK"/>
                         <outlet property="signUpView" destination="8NB-cQ-sOK" id="7jK-d6-3yS"/>
                     </connections>
                 </viewController>
@@ -123,10 +147,10 @@
             </objects>
             <point key="canvasLocation" x="780" y="-84.107946026986511"/>
         </scene>
-        <!--View Controller-->
+        <!--LogIn View Controller-->
         <scene sceneID="lYB-vj-wfz">
             <objects>
-                <viewController id="OzP-ZZ-nF0" sceneMemberID="viewController">
+                <viewController title="LogIn View Controller" id="OzP-ZZ-nF0" customClass="LogInViewController" customModule="FirebaseAuthSandbox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yWP-4R-9rB">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="86"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,23 +160,33 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="logIn:" destination="ecg-ZL-FQw" eventType="touchUpInside" id="qho-Av-zAG"/>
+                                    <action selector="logIn:" destination="OzP-ZZ-nF0" eventType="touchUpInside" id="vJK-cg-5G0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKk-pL-uhZ">
                                 <rect key="frame" x="110" y="56" width="123" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Forgot Password?"/>
+                                <connections>
+                                    <action selector="recoverPassword:" destination="OzP-ZZ-nF0" eventType="touchUpInside" id="Lv9-3m-5bS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="lT0-l3-sp7"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl3-Pg-98W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ecg-ZL-FQw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
+            <point key="canvasLocation" x="1486" y="-193"/>
         </scene>
-        <!--View Controller-->
+        <!--SignUpController-->
         <scene sceneID="JRX-i9-1Hw">
             <objects>
-                <viewController id="Vj2-jJ-Ed5" sceneMemberID="viewController">
+                <viewController title="SignUpController" id="Vj2-jJ-Ed5" customClass="SignUpViewController" customModule="FirebaseAuthSandbox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HqP-zj-pxc">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="86"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,14 +203,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Create Account"/>
+                                <connections>
+                                    <action selector="signUp:" destination="vio-Jq-VSj" eventType="touchUpInside" id="Fom-Tc-s4S"/>
+                                    <action selector="signUp:" destination="Vj2-jJ-Ed5" eventType="touchUpInside" id="HP7-Hw-0lL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="bj9-T6-gxj"/>
                     </view>
+                    <connections>
+                        <outlet property="nameText" destination="qGw-bh-cNu" id="2Kc-SI-FYb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYa-9R-rPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vio-Jq-VSj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="443"/>
+            <point key="canvasLocation" x="1486" y="-343"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_facebook" width="24" height="24"/>
+        <image name="ic_google" width="24" height="24"/>
+    </resources>
 </document>
