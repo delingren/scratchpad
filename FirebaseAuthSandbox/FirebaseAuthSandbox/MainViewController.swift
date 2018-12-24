@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-class ViewController: UIViewController, FUIAuthDelegate {
+class MainViewController: UIViewController, FUIAuthDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     
