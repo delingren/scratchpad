@@ -12,6 +12,7 @@ import Firebase
 class MainViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userEmail: UILabel!
+    @IBOutlet weak var userVerified: UILabel!
     
     var handle: AuthStateDidChangeListenerHandle?
     
@@ -37,11 +38,10 @@ class MainViewController: UIViewController {
     
     @IBAction func loginAction(sender: AnyObject) {
         let authViewController = storyboard?.instantiateViewController(withIdentifier: "AuthViewController")
-        //navigationController?.pushViewController(authViewController!, animated: true)
         self.present(authViewController!, animated: true)
     }
     
-    @IBAction func logoutPressed(_ sender: Any) {
+    @IBAction func didTapLogOut(_ sender: Any) {
         do {
             try Auth.auth().signOut()
             userName.text = nil
@@ -55,6 +55,7 @@ class MainViewController: UIViewController {
         if (user != nil) {
             userName.text = user!.displayName
             userEmail.text = user!.email
+            userVerified.text = user!.isEmailVerified ? "Verified" : "Not verified"
         }
     }
 }

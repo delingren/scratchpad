@@ -17,16 +17,13 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var nameText: UITextField!
     
-    @IBOutlet weak var logInView: UIView!
     @IBOutlet weak var signUpView: UIView!
-    
+    @IBOutlet weak var logInView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        //signUpView.isHidden = true
     }
     
     
@@ -39,7 +36,8 @@ class AuthViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    @IBAction func logInSignUpChanged(_ sender: Any) {
+    
+    @IBAction func changedLogInSignUp(_ sender: Any) {
         switch (logInSignUp.selectedSegmentIndex){
         case 0:
             logInView.isHidden = false;
@@ -52,26 +50,58 @@ class AuthViewController: UIViewController {
         }
     }
     
-    @IBAction func facebookSignIn(_ sender: Any) {
-        //var action = UIAlertAction(title: "Facebook", style: .default) { (UIAlertAction) in
+    @IBAction func didTapEmailLogIn(_ sender: Any) {
+        if let email = self.emailText.text, let password = self.passwordText.text {
+            showSpinner {
+                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                    self.hideSpinner {
+                        if let error = error {
+                            self.showMessagePrompt(error.localizedDescription)
+                            return
+                        }
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        } else {
+            showMessagePrompt("Email and password can't be empty")
+        }
+    }
+    
+    @IBAction func didTapRecoverPassword(_ sender: Any) {
+        if let email = self.emailText.text {
+            self.showSpinner {
+                Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                    self.hideSpinner {
+                        if let error = error {
+                            self.showMessagePrompt(error.localizedDescription)
+                            return
+                        }
+                        self.showMessagePrompt("Password recovery email sent")
+                    }
+                }
+            }
+        } else {
+            showMessagePrompt("Enter your email to reset your password")
+        }
+    }
+    
+    @IBAction func didTapFacebookLogIn(_ sender: Any) {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
             if let error = error {
-                //self.showMessagePrompt(error.localizedDescription)
+                self.showMessagePrompt(error.localizedDescription)
                 print(error.localizedDescription)
             } else if result!.isCancelled {
                 print("FBLogin cancelled")
             } else {
-                // [START headless_facebook_auth]
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                // [END headless_facebook_auth]
                 self.firebaseLogin(credential)
             }
         })
-        //}
     }
     
-    @IBAction func googleSignIn(_ sender: Any) {
+    @IBAction func didTapGoogleLogIn(_ sender: Any) {
         /*
          var action = UIAlertAction(title: "Google", style: .default) { (UIAlertAction) in
          // [START setup_gid_uidelegate]
@@ -82,13 +112,16 @@ class AuthViewController: UIViewController {
     }
     
     func firebaseLogin(_ credential: AuthCredential) {
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+        showSpinner {
+            Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+                self.hideSpinner {
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
-            self.dismiss(animated: true, completion: nil)
         }
     }
 }
-
