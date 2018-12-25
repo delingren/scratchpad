@@ -17,7 +17,6 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
-    @IBOutlet weak var nameText: UITextField!
     
     @IBOutlet weak var signUpView: UIView!
     @IBOutlet weak var logInView: UIView!
@@ -50,16 +49,47 @@ class AuthViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapEmailLogIn(_ sender: Any) {
-        if let email = self.emailText.text, let password = self.passwordText.text {
-            showSpinner {
-                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                    self.hideSpinner {
-                        if let error = error {
-                            self.showMessagePrompt(error.localizedDescription)
+    @IBAction func didTapSignUp(_ sender: Any) {
+        if let email = emailText.text, let password = passwordText.text {
+            self.showSpinner ("Creating user ...") {
+                Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+                    if error != nil {
+                        self.hideSpinner {
+                            self.showMessagePrompt(error!.localizedDescription)
                             return
                         }
-                        self.dismiss(animated: true, completion: nil)
+                    }
+                    
+                    Auth.auth().currentUser?.sendEmailVerification { error in
+                        self.hideSpinner {
+                            if error == nil {
+                                self.showMessagePrompt("Email verification sent. Check your email.") { action in
+                                    self.dismiss(animated: true)
+                                }
+                            }
+                            else {
+                                self.showMessagePrompt(error!.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            showMessagePrompt("Email and password can't be empty")
+        }
+    }
+    
+    @IBAction func didTapEmailLogIn(_ sender: Any) {
+        if let email = emailText.text, let password = passwordText.text {
+            showSpinner ("Logging in ...") {
+                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                    self.hideSpinner {
+                        if error != nil {
+                            self.showMessagePrompt(error!.localizedDescription)
+                            return
+                        }
+                        
+                        self.dismiss(animated: true)
                     }
                 }
             }
@@ -69,16 +99,16 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func didTapRecoverPassword(_ sender: Any) {
-        if let email = self.emailText.text {
-            self.showSpinner {
+        if let email = emailText.text {
+            self.showSpinner ("Sending password recovery email ...") {
                 Auth.auth().sendPasswordReset(withEmail: email) { (error) in
                     self.hideSpinner {
-                        if let error = error {
-                            self.showMessagePrompt(error.localizedDescription)
+                        if error != nil {
+                            self.showMessagePrompt(error!.localizedDescription)
                             return
                         }
-                        self.showMessagePrompt("Password recovery email sent")
-                    }
+                        
+                        self.showMessagePrompt("Password recovery email sent")                    }
                 }
             }
         } else {
@@ -89,14 +119,12 @@ class AuthViewController: UIViewController {
     @IBAction func didTapFacebookLogIn(_ sender: Any) {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
-            if let error = error {
-                self.showMessagePrompt(error.localizedDescription)
-                print(error.localizedDescription)
+            if error != nil {
+                self.showMessagePrompt(error!.localizedDescription)
             } else if result!.isCancelled {
-                print("FBLogin cancelled")
             } else {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                self.firebaseLogin(credential)
+                self.thirdPartyLogin(credential)
             }
         })
     }
@@ -111,12 +139,12 @@ class AuthViewController: UIViewController {
          }*/
     }
     
-    func firebaseLogin(_ credential: AuthCredential) {
-        showSpinner {
+    func thirdPartyLogin(_ credential: AuthCredential) {
+        showSpinner ("Retrieving user information ...") {
             Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
                 self.hideSpinner {
-                    if let error = error {
-                        print(error.localizedDescription)
+                    if error != nil {
+                        self.showMessagePrompt(error!.localizedDescription)
                         return
                     }
                     self.dismiss(animated: true, completion: nil)

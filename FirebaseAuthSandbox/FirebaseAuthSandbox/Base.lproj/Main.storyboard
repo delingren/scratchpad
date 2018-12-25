@@ -174,18 +174,14 @@
                                 <rect key="frame" x="0.0" y="179" width="375" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCA-9G-4h3">
-                                        <rect key="frame" x="16" y="8" width="343" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" textContentType="name"/>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlU-U9-v5m">
-                                        <rect key="frame" x="124" y="52" width="126" height="34"/>
+                                        <rect key="frame" x="124" y="26" width="126" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Create Account"/>
+                                        <connections>
+                                            <action selector="didTapSignUp:" destination="bXN-qG-6KB" eventType="touchUpInside" id="Bfh-ew-F1V"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -198,7 +194,6 @@
                         <outlet property="emailText" destination="fQ4-by-Gj4" id="Ji4-38-S6v"/>
                         <outlet property="logInSignUp" destination="UGM-0R-czz" id="PG2-xK-bnb"/>
                         <outlet property="logInView" destination="miU-fv-D8c" id="fFT-6a-SmX"/>
-                        <outlet property="nameText" destination="KCA-9G-4h3" id="Vso-Y7-xCG"/>
                         <outlet property="passwordText" destination="tYS-FN-iph" id="G31-r4-fnK"/>
                         <outlet property="signUpView" destination="F5F-UM-ek3" id="bWC-N8-6NZ"/>
                     </connections>
