@@ -175,7 +175,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlU-U9-v5m">
-                                        <rect key="frame" x="124" y="26" width="126" height="34"/>
+                                        <rect key="frame" x="124" y="49" width="126" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Create Account"/>
@@ -183,6 +183,13 @@
                                             <action selector="didTapSignUp:" destination="bXN-qG-6KB" eventType="touchUpInside" id="Bfh-ew-F1V"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aa1-QA-2Mz">
+                                        <rect key="frame" x="16" y="11" width="342" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -194,13 +201,14 @@
                         <outlet property="emailText" destination="fQ4-by-Gj4" id="Ji4-38-S6v"/>
                         <outlet property="logInSignUp" destination="UGM-0R-czz" id="PG2-xK-bnb"/>
                         <outlet property="logInView" destination="miU-fv-D8c" id="fFT-6a-SmX"/>
+                        <outlet property="passwordRepeatText" destination="Aa1-QA-2Mz" id="sq7-XX-awA"/>
                         <outlet property="passwordText" destination="tYS-FN-iph" id="G31-r4-fnK"/>
                         <outlet property="signUpView" destination="F5F-UM-ek3" id="bWC-N8-6NZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJ6-Q7-t2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="-81"/>
+            <point key="canvasLocation" x="728.79999999999995" y="-81.409295352323838"/>
         </scene>
     </scenes>
     <resources>

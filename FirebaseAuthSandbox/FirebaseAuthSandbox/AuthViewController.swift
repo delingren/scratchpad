@@ -17,6 +17,7 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var passwordRepeatText: UITextField!
     
     @IBOutlet weak var signUpView: UIView!
     @IBOutlet weak var logInView: UIView!
@@ -50,6 +51,11 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func didTapSignUp(_ sender: Any) {
+        if passwordText.text != passwordRepeatText.text {
+            showMessagePrompt("Passwords don't match")
+            return
+        }
+        
         if let email = emailText.text, let password = passwordText.text {
             self.showSpinner ("Creating user ...") {
                 Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
