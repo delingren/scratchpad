@@ -12,7 +12,7 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var logInSignUp: UISegmentedControl!
     
     @IBOutlet weak var emailText: UITextField!
@@ -136,13 +136,8 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func didTapGoogleLogIn(_ sender: Any) {
-        /*
-         var action = UIAlertAction(title: "Google", style: .default) { (UIAlertAction) in
-         // [START setup_gid_uidelegate]
          GIDSignIn.sharedInstance().uiDelegate = self
          GIDSignIn.sharedInstance().signIn()
-         // [END setup_gid_uidelegate]
-         }*/
     }
     
     func thirdPartyLogin(_ credential: AuthCredential) {
