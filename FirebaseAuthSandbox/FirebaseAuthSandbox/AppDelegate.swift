@@ -11,15 +11,14 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+        
         return true
     }
 
@@ -44,28 +43,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    // [START headless_google_auth]
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // [START_EXCLUDE]
-        guard let controller = GIDSignIn.sharedInstance().uiDelegate as? AuthViewController else { return }
-        // [END_EXCLUDE]
-        if let error = error {
-            // [START_EXCLUDE]
-            controller.showMessagePrompt(error.localizedDescription)
-            // [END_EXCLUDE]
-            return
-        }
-        
-        // [START google_credential]
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
-        // [END google_credential]
-        // [START_EXCLUDE]
-        controller.thirdPartyLogin(credential)
-        // [END_EXCLUDE]
-    }
-    // [END headless_google_auth]
 }
 

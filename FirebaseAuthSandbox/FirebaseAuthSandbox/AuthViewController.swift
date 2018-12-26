@@ -12,7 +12,7 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class AuthViewController: UIViewController, GIDSignInUIDelegate {
+class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     @IBOutlet weak var logInSignUp: UISegmentedControl!
     
     @IBOutlet weak var emailText: UITextField!
@@ -24,6 +24,9 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
     }
     
     
@@ -127,11 +130,16 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate {
         loginManager.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
             if error != nil {
                 self.showMessagePrompt(error!.localizedDescription)
-            } else if result!.isCancelled {
-            } else {
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                self.thirdPartyLogin(credential)
+                return
             }
+            
+            if result!.isCancelled {
+                self.showMessagePrompt("Facebook Login cancelled.")
+                return
+            }
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            self.thirdPartyLogin(credential)
         })
     }
     
@@ -140,6 +148,18 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate {
          GIDSignIn.sharedInstance().signIn()
     }
     
+    // Implementing GIDSignInDelegate
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        if error != nil {
+            self.showMessagePrompt(error!.localizedDescription)
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        self.thirdPartyLogin(credential)
+    }
+
     func thirdPartyLogin(_ credential: AuthCredential) {
         showSpinner ("Retrieving user information ...") {
             Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
