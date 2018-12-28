@@ -15,18 +15,36 @@ import FBSDKLoginKit
 class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     @IBOutlet weak var logInSignUp: UISegmentedControl!
     
+    @IBOutlet weak var googleLogInButton: UIButton!
+    @IBOutlet weak var facebookLogInButton: UIButton!
+    
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var passwordRepeatText: UITextField!
     
-    @IBOutlet weak var signUpView: UIView!
     @IBOutlet weak var logInView: UIView!
+    @IBOutlet weak var signUpView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+//        googleLogInButton.layer.borderWidth = 1
+//        googleLogInButton.layer.borderColor = UIColor.gray.cgColor
+//        
+//        facebookLogInButton.layer.borderWidth = 1
+//        facebookLogInButton.layer.borderColor = UIColor.gray.cgColor
+        
+//        logInSignUp.setTitleTextAttributes([
+//            NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 22),
+//            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+//            ], for: .normal)
+//        logInSignUp.setTitleTextAttributes([
+//            NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 22),
+//            NSAttributedString.Key.foregroundColor: UIColor.orange
+//            ], for: .selected)
     }
     
     

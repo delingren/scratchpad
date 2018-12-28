@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E26635321D5800000982811 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E26635221D5800000982811 /* LogInViewController.swift */; };
+		1E26635521D5800E00982811 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E26635421D5800E00982811 /* SignUpViewController.swift */; };
 		1E98290C21C8977D00CB5A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98290B21C8977D00CB5A86 /* AppDelegate.swift */; };
 		1E98290E21C8977D00CB5A86 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98290D21C8977D00CB5A86 /* MainViewController.swift */; };
 		1E98291121C8977D00CB5A86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E98290F21C8977D00CB5A86 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E26635221D5800000982811 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		1E26635421D5800E00982811 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1E6406EE21CA2A9A00A4FEEF /* FirebaseAuthSandbox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirebaseAuthSandbox.entitlements; sourceTree = "<group>"; };
 		1E98290821C8977D00CB5A86 /* FirebaseAuthSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseAuthSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E98290B21C8977D00CB5A86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				1E98290B21C8977D00CB5A86 /* AppDelegate.swift */,
 				1E98290D21C8977D00CB5A86 /* MainViewController.swift */,
 				1E98290F21C8977D00CB5A86 /* Main.storyboard */,
+				1E26635221D5800000982811 /* LogInViewController.swift */,
+				1E26635421D5800E00982811 /* SignUpViewController.swift */,
 				1E9CD5E421CF642000A11333 /* AuthViewController.swift */,
 				1E98291221C8978000CB5A86 /* Assets.xcassets */,
 				1E98291421C8978000CB5A86 /* LaunchScreen.storyboard */,
@@ -304,9 +310,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E26635521D5800E00982811 /* SignUpViewController.swift in Sources */,
 				1E98290E21C8977D00CB5A86 /* MainViewController.swift in Sources */,
 				1E9CD5E521CF642000A11333 /* AuthViewController.swift in Sources */,
 				1E98290C21C8977D00CB5A86 /* AppDelegate.swift in Sources */,
+				1E26635321D5800000982811 /* LogInViewController.swift in Sources */,
 				1E9CD5FB21D1CE6C00A11333 /* UIViewController+Alerts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
