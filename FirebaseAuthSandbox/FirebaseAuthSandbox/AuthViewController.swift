@@ -17,11 +17,7 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
     
     @IBOutlet weak var googleLogInButton: UIButton!
     @IBOutlet weak var facebookLogInButton: UIButton!
-    
-    @IBOutlet weak var emailText: UITextField!
-    @IBOutlet weak var passwordText: UITextField!
-    @IBOutlet weak var passwordRepeatText: UITextField!
-    
+        
     @IBOutlet weak var logInView: UIView!
     @IBOutlet weak var signUpView: UIView!
     
@@ -30,21 +26,6 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
-//        googleLogInButton.layer.borderWidth = 1
-//        googleLogInButton.layer.borderColor = UIColor.gray.cgColor
-//        
-//        facebookLogInButton.layer.borderWidth = 1
-//        facebookLogInButton.layer.borderColor = UIColor.gray.cgColor
-        
-//        logInSignUp.setTitleTextAttributes([
-//            NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 22),
-//            NSAttributedString.Key.foregroundColor: UIColor.lightGray
-//            ], for: .normal)
-//        logInSignUp.setTitleTextAttributes([
-//            NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 22),
-//            NSAttributedString.Key.foregroundColor: UIColor.orange
-//            ], for: .selected)
     }
     
     
@@ -71,91 +52,17 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         }
     }
     
-    @IBAction func didTapSignUp(_ sender: Any) {
-        if passwordText.text != passwordRepeatText.text {
-            showMessagePrompt("Passwords don't match")
-            return
-        }
-        
-        if let email = emailText.text, let password = passwordText.text {
-            self.showSpinner ("Creating user ...") {
-                Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-                    if error != nil {
-                        self.hideSpinner {
-                            self.showMessagePrompt(error!.localizedDescription)
-                            return
-                        }
-                    }
-                    
-                    Auth.auth().currentUser?.sendEmailVerification { error in
-                        self.hideSpinner {
-                            if error == nil {
-                                self.showMessagePrompt("Email verification sent. Check your email.") { action in
-                                    self.dismiss(animated: true)
-                                }
-                            }
-                            else {
-                                self.showMessagePrompt(error!.localizedDescription)
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            showMessagePrompt("Email and password can't be empty")
-        }
-    }
-    
-    @IBAction func didTapEmailLogIn(_ sender: Any) {
-        if let email = emailText.text, let password = passwordText.text {
-            showSpinner ("Logging in ...") {
-                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                    self.hideSpinner {
-                        if error != nil {
-                            self.showMessagePrompt(error!.localizedDescription)
-                            return
-                        }
-                        
-                        self.dismiss(animated: true)
-                    }
-                }
-            }
-        } else {
-            showMessagePrompt("Email and password can't be empty")
-        }
-    }
-    
-    @IBAction func didTapRecoverPassword(_ sender: Any) {
-        if let email = emailText.text {
-            self.showSpinner ("Sending password recovery email ...") {
-                Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                    self.hideSpinner {
-                        if error != nil {
-                            self.showMessagePrompt(error!.localizedDescription)
-                            return
-                        }
-                        
-                        self.showMessagePrompt("Password recovery email sent")                    }
-                }
-            }
-        } else {
-            showMessagePrompt("Enter your email to reset your password")
-        }
-    }
-    
     @IBAction func didTapFacebookLogIn(_ sender: Any) {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
-            if error != nil {
+            guard error == nil else {
                 self.showMessagePrompt(error!.localizedDescription)
                 return
             }
-            
-            if result!.isCancelled {
-                self.showMessagePrompt("Facebook Login cancelled.")
+            guard !result!.isCancelled else {
+                // User canceled, no need to show alert
                 return
             }
-            
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             self.thirdPartyLogin(credential)
         })
@@ -168,25 +75,90 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
     
     // Implementing GIDSignInDelegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        if error != nil {
+        guard error == nil else {
             self.showMessagePrompt(error!.localizedDescription)
             return
         }
-        
-        guard let authentication = user.authentication else { return }
+        guard let authentication = user.authentication else {
+            return
+        }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         self.thirdPartyLogin(credential)
     }
 
     func thirdPartyLogin(_ credential: AuthCredential) {
-        showSpinner ("Retrieving user information ...") {
+        displaySpinner() {
             Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-                self.hideSpinner {
+                self.removeSpinner() {
                     if error != nil {
                         self.showMessagePrompt(error!.localizedDescription)
                         return
                     }
                     self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    func signUp(email: String?, password: String?, name: String?) {
+        guard email != nil && password != nil && name != nil else {
+            self.showMessagePrompt("Email, password, and name can't be empty")
+            return
+        }
+        displaySpinner {
+            Auth.auth().createUser(withEmail: email!, password: password!) { (authResult, error) in
+                guard error == nil else {
+                    self.removeSpinner {
+                        self.showMessagePrompt(error!.localizedDescription)
+                    }
+                    return
+                }
+                Auth.auth().currentUser?.sendEmailVerification { error in
+                    self.removeSpinner {
+                        guard error == nil else {
+                            self.showMessagePrompt(error!.localizedDescription)
+                            return
+                        }
+                        self.showMessagePrompt("Verification sent. Check your email.") { _ in
+                            self.dismiss(animated: true)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func emailLogIn(email: String?, password: String?) {
+        guard email != nil && password != nil else {
+            showMessagePrompt("Email and password can't be empty")
+            return
+        }
+        displaySpinner {
+            Auth.auth().signIn(withEmail: email!, password: password!) { (user, error) in
+                self.removeSpinner {
+                    guard error == nil else {
+                        self.showMessagePrompt(error!.localizedDescription)
+                        return
+                    }
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+    }
+    
+    func recoverPassword(email: String?) {
+        guard email != nil else {
+            showMessagePrompt("Enter your email to reset your password")
+            return
+        }
+        displaySpinner {
+            Auth.auth().sendPasswordReset(withEmail: email!) { error in
+                self.removeSpinner {
+                    guard error == nil else {
+                        self.showMessagePrompt(error!.localizedDescription)
+                        return
+                    }
+                    self.showMessagePrompt("Password recovery instructions sent, check your email")
                 }
             }
         }

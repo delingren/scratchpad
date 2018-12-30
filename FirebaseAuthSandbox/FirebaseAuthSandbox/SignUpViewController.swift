@@ -10,6 +10,9 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,4 +30,7 @@ class SignUpViewController: UIViewController {
     }
     */
 
+    @IBAction func didTapSignUp(_ sender: Any) {
+        (parent as! AuthViewController).signUp(email: emailText.text, password: passwordText.text, name: "")
+    }
 }
