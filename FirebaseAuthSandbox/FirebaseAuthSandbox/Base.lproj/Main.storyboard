@@ -44,7 +44,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="didTapLogOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OPV-yV-yGh"/>
+                                    <action selector="logOutPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OPV-yV-yGh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Er-bQ-W5e">
@@ -104,7 +104,7 @@
                                     <segment title="Sign Up"/>
                                 </segments>
                                 <connections>
-                                    <action selector="changedLogInSignUp:" destination="bXN-qG-6KB" eventType="valueChanged" id="maN-Bf-BET"/>
+                                    <action selector="logInSignUpChanged:" destination="bXN-qG-6KB" eventType="valueChanged" id="maN-Bf-BET"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0h-Z1-uYE">
@@ -121,7 +121,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapFacebookLogIn:" destination="bXN-qG-6KB" eventType="touchUpInside" id="oNl-xQ-TTn"/>
+                                    <action selector="facebookLogInPressed:" destination="bXN-qG-6KB" eventType="touchUpInside" id="oNl-xQ-TTn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-5D-V1Z">
@@ -134,7 +134,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapGoogleLogIn:" destination="bXN-qG-6KB" eventType="touchUpInside" id="CI0-4d-rro"/>
+                                    <action selector="googleLogInPressed:" destination="bXN-qG-6KB" eventType="touchUpInside" id="CI0-4d-rro"/>
                                 </connections>
                             </button>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tuy-Gg-Zjk">
@@ -219,7 +219,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Log In"/>
                                 <connections>
-                                    <action selector="didTapLogIn:" destination="Sne-de-NYM" eventType="touchUpInside" id="3yb-Kk-pFf"/>
+                                    <action selector="logInPressed:" destination="Sne-de-NYM" eventType="touchUpInside" id="3yb-Kk-pFf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfh-dX-9hI">
@@ -227,7 +227,7 @@
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="Forgot Password?"/>
                                 <connections>
-                                    <action selector="didTapRecoverPassword:" destination="Sne-de-NYM" eventType="touchUpInside" id="Sdk-eH-5bi"/>
+                                    <action selector="recoverPasswordPressed:" destination="Sne-de-NYM" eventType="touchUpInside" id="Sdk-eH-5bi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -298,7 +298,7 @@
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <action selector="didTapEmailLogIn:" destination="bXN-qG-6KB" eventType="touchUpInside" id="YBd-Ih-6zc"/>
-                                    <action selector="didTapSignUp:" destination="KvQ-Lo-tBj" eventType="touchUpInside" id="YMK-jm-HN2"/>
+                                    <action selector="signUpPressed:" destination="KvQ-Lo-tBj" eventType="touchUpInside" id="YMK-jm-HN2"/>
                                 </connections>
                             </button>
                         </subviews>

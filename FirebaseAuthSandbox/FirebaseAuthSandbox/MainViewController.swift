@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  FirebaseAuthSandbox
-//
-//  Created by Deling Ren on 12/17/18.
-//  Copyright © 2018 Deling Ren. All rights reserved.
-//
-
 import UIKit
 import Firebase
 
@@ -15,12 +7,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var userVerified: UILabel!
     
     var handle: AuthStateDidChangeListenerHandle?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         let auth = Auth.auth()
         updateUserInfo(user: auth.currentUser)
@@ -36,12 +23,12 @@ class MainViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
-    @IBAction func loginAction(sender: AnyObject) {
+    func loginAction(sender: AnyObject) {
         let authViewController = storyboard?.instantiateViewController(withIdentifier: "AuthViewController")
         self.present(authViewController!, animated: true)
     }
     
-    @IBAction func didTapLogOut(_ sender: Any) {
+    @IBAction func logOutPressed(_ sender: Any) {
         do {
             try Auth.auth().signOut()
             userName.text = nil

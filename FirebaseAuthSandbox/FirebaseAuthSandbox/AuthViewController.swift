@@ -1,11 +1,3 @@
-//
-//  AuthViewController.swift
-//  FirebaseAuthSandbox
-//
-//  Created by Deling Ren on 12/22/18.
-//  Copyright © 2018 Deling Ren. All rights reserved.
-//
-
 import UIKit
 import Firebase
 import GoogleSignIn
@@ -28,18 +20,11 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().delegate = self
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    @IBAction func changedLogInSignUp(_ sender: Any) {
+    @IBAction func logInSignUpChanged(_ sender: Any) {
         switch (logInSignUp.selectedSegmentIndex){
         case 0:
             logInView.isHidden = false;
@@ -52,7 +37,7 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         }
     }
     
-    @IBAction func didTapFacebookLogIn(_ sender: Any) {
+    @IBAction func facebookLogInPressed(_ sender: Any) {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
             guard error == nil else {
@@ -68,7 +53,7 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         })
     }
     
-    @IBAction func didTapGoogleLogIn(_ sender: Any) {
+    @IBAction func googleLogInPressed(_ sender: Any) {
          GIDSignIn.sharedInstance().uiDelegate = self
          GIDSignIn.sharedInstance().signIn()
     }
