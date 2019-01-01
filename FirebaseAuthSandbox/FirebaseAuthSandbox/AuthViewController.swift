@@ -4,14 +4,15 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class AuthViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     @IBOutlet weak var logInSignUp: UISegmentedControl!
-    
     @IBOutlet weak var googleLogInButton: UIButton!
     @IBOutlet weak var facebookLogInButton: UIButton!
-        
     @IBOutlet weak var logInView: UIView!
     @IBOutlet weak var signUpView: UIView!
+    
+    var logInViewController: LogInViewController?
+    var signUpViewController: SignUpViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,16 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().delegate = self
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier{
+        case "logIn":
+            self.logInViewController = segue.destination as? LogInViewController
+        case "signUp":
+            self.signUpViewController = segue.destination as? SignUpViewController
+        default:
+            return
+        }
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -148,4 +159,29 @@ class AuthViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelega
             }
         }
     }
+    
+    // UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //textField.resignFirstResponder()
+        switch textField{
+        case logInViewController?.emailText:
+            logInViewController?.passwordText.becomeFirstResponder()
+        case logInViewController?.passwordText:
+            textField.resignFirstResponder()
+            logInViewController?.logInPressed(nil)
+        case signUpViewController?.firstNameText:
+            signUpViewController?.lastNameText.becomeFirstResponder()
+        case signUpViewController?.lastNameText:
+            signUpViewController?.emailText.becomeFirstResponder()
+        case signUpViewController?.emailText:
+            signUpViewController?.passwordText.becomeFirstResponder()
+        case signUpViewController?.passwordText:
+            textField.resignFirstResponder()
+            signUpViewController?.signUpPressed(nil)
+        default:
+            break;
+        }
+        return true
+    }
+    // End of UITextFieldDelegate
 }
