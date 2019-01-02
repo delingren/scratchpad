@@ -4,6 +4,7 @@ import Firebase
 class MainViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userEmail: UILabel!
+    @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var userVerified: UILabel!
     
     var handle: AuthStateDidChangeListenerHandle?
@@ -43,6 +44,20 @@ class MainViewController: UIViewController {
             userName.text = user!.displayName
             userEmail.text = user!.email
             userVerified.text = user!.isEmailVerified ? "Verified" : "Not verified"
+            
+            if let photoURL = user!.photoURL {
+                DispatchQueue.global(qos: .default).async {
+                    let data = try? Data(contentsOf: photoURL)
+                    if let data = data {
+                        let image = UIImage(data: data)
+                        DispatchQueue.main.async(execute: {
+                            self.userProfileImage?.image = image
+                        })
+                    }
+                }
+            } else {
+                userProfileImage?.image = UIImage(named: "ic_user")
+            }
         }
     }
 }

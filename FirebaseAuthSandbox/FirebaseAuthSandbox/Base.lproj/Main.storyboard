@@ -75,6 +75,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DMk-kG-C6T">
+                                <rect key="frame" x="110" y="181" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -82,12 +86,13 @@
                     <connections>
                         <outlet property="userEmail" destination="nSz-gH-6Av" id="pZr-Zd-11j"/>
                         <outlet property="userName" destination="Dcd-Pz-Mug" id="PLy-CV-s26"/>
+                        <outlet property="userProfileImage" destination="DMk-kG-C6T" id="fWK-Yb-cLF"/>
                         <outlet property="userVerified" destination="ZNO-cS-o0L" id="mdm-wv-Hq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="72.799999999999997" y="-81.409295352323838"/>
+            <point key="canvasLocation" x="71.25" y="-82.394366197183103"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="Mw5-PV-n3s">
