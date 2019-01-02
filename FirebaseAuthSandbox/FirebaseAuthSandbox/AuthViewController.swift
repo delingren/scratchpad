@@ -19,6 +19,13 @@ class AuthViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDele
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+//        googleLogInButton.layer.borderWidth = 1
+//        googleLogInButton.layer.borderColor = UIColor.purple.cgColor
+//        googleLogInButton.layer.shadowColor = UIColor.lightGray.cgColor
+//        googleLogInButton.layer.shadowOffset = CGSize(width: 2, height:2)
+//        googleLogInButton.layer.shadowOpacity = 1.0
+//        googleLogInButton.layer.shadowRadius = 5
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
