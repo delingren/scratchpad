@@ -12,5 +12,5 @@ target 'FirebaseAuthSandbox' do
 
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
-  pod 'FirebaseUI'
+  pod 'GoogleSignIn'
 end
