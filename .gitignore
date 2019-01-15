@@ -2,3 +2,6 @@
 Pods/
 xcuserdata/
 *.xcworkspace/
+
+node_modules/
+dist/
