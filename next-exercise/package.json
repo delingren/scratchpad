@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "node server.js"
+    "start": "next"
   },
   "keywords": [],
   "author": "",
