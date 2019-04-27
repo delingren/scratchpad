@@ -4,4 +4,5 @@ xcuserdata/
 *.xcworkspace/
 
 node_modules/
+.next/
 dist/
