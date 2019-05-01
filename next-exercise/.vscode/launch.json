@@ -4,6 +4,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Next: Express",
+      "program": "${workspaceFolder}/server.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Next: Node",
       "program": "${workspaceFolder}/node_modules/.bin/next",
       "runtimeArgs": ["--inspect"],

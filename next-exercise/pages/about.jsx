@@ -1,7 +1,5 @@
-import React from 'react';
+import React from "react";
+import Layout from "../components/MyLayout";
 
-function about() {
-  return <div>This is a Next.js exercise.</div>;
-}
-
-export default about;
+const aboutPageContent = <p>This is a Next.js exercise.</p>;
+export default () => <Layout content={aboutPageContent} />;
