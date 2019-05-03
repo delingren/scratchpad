@@ -1,39 +1,24 @@
+// Use react-chartjs
 // https://github.com/reactjs/react-chartjs
 
-import React from 'react';
-
-var LineChart = require("react-chartjs").Line;
+import React from "react";
+import { getPageviewChartData } from "./samplePageView";
+import { Bar } from "react-chartjs";
 
 export default class ChartReactChartJS extends React.Component {
   render() {
+    let pageviewData = getPageviewChartData(24 * 60 * 60 * 1000);
+
     var chartData = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: pageviewData.map(dataPoint => dataPoint.x.toDateString()),
       datasets: [
         {
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: pageviewData.map(dataPoint => dataPoint.y)
         },
-        {
-          label: "My Second dataset",
-          fillColor: "rgba(151,187,205,0.2)",
-          strokeColor: "rgba(151,187,205,1)",
-          pointColor: "rgba(151,187,205,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(151,187,205,1)",
-          data: [28, 48, 40, 19, 86, 27, 90]
-        }
       ]
     };
 
     var chartOptions = {
-
       ///Boolean - Whether grid lines are shown across the chart
       scaleShowGridLines: true,
 
@@ -77,7 +62,8 @@ export default class ChartReactChartJS extends React.Component {
       datasetFill: true,
 
       //String - A legend template
-      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>",
+      legendTemplate:
+        '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>',
 
       //Boolean - Whether to horizontally center the label and point dot inside the grid
       offsetGridLines: false
@@ -85,10 +71,16 @@ export default class ChartReactChartJS extends React.Component {
 
     return (
       <div>
-        <div>Example: react-chartjs</div>
+        <div>Page views</div>
         <div>
-          <LineChart data={chartData} options={chartOptions} width="600" height="250" />
+          <Bar
+            data={chartData}
+            options={chartOptions}
+            width="1000"
+            height="400"
+          />
         </div>
-      </div>);
+      </div>
+    );
   }
 }

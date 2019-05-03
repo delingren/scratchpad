@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "canvasjs": "^1.8.1",
-    "chart.js": "^1.1.1",
+    "chart.js": "^2.8.0",
     "react": "^16.8.6",
     "react-chartjs": "^1.2.0",
     "react-dom": "^16.8.6",
