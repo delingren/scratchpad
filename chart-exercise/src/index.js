@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import ChartReactChartJS from "./App1";
-import ChartCanvasJS from "./App2";
-import PageViewRecharts from "./App3";
+// import ChartReactChartJS from "./App1";
+// import ChartCanvasJS from "./App2";
+// import PageViewRecharts from "./App3";
+import PageViewChartjs2 from "./App4";
 
 class PageViewChart extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class PageViewChart extends React.Component {
   }
 
   render() {
-    const chart = <PageViewRecharts ref={node => (this.chartRef = node)} />;
+    const chart = <PageViewChartjs2 ref={node => (this.chartRef = node)} />;
     return (
       <div>
         <div>
@@ -32,6 +33,4 @@ class PageViewChart extends React.Component {
   }
 }
 
-//ReactDOM.render(<ChartReactChartJS />, document.getElementById('root'));
-//ReactDOM.render(<ChartCanvasJS />, document.getElementById('root'));
 ReactDOM.render(<PageViewChart />, document.getElementById("root"));
