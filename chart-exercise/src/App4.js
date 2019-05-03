@@ -20,14 +20,16 @@ export default class PageViewChartjs2 extends React.Component {
       labels: pageviewData.map(dataPoint => dataPoint.x.toDateString()),
       datasets: [
         {
-          data: pageviewData.map(dataPoint => dataPoint.y)
+          data: pageviewData.map(dataPoint => dataPoint.y),
+          lineTension: 0,
         }
       ]
     };
 
     var chartOptions = {
       title: {display: true, text: 'Page Views'},
-      legend: { display: false }
+      legend: { display: false },
+      lineTension: 0,
     };
 
     var result;
