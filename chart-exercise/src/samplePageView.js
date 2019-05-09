@@ -9,7 +9,7 @@ export function getPageviewChartData(sampleRate) {
   for (let i = 0; i < milliseconds.length; i++) {
     const x = milliseconds[i] / sampleRate;
     if (x - currentX >= 1 || i === milliseconds.length - 1) {
-      const currentDate = new Date(currentX * sampleRate);
+      const currentDate = new Date((currentX + 1) * sampleRate);
       chartData.push({ x: currentDate, y: currentY });
       currentX = Math.floor(x);
       currentY = 0;
