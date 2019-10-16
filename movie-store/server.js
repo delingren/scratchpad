@@ -1,5 +1,5 @@
-import express from 'express';
-import next from 'next';
+const next = require('next');
+const express = require('express');
 
 const port = 3000;
 const dev = true;
