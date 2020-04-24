@@ -1,4 +1,4 @@
-module Main where
+module SquareSum where
 import Data.List
 
 solveTail :: Int -> [Int] -> [[Int]]
@@ -19,3 +19,5 @@ solveFirst size =
 
 main :: IO [()]
 main = sequence [do print n; print (solveFirst n) | n <- [1..100]]
+
+-- >>> solve 15
