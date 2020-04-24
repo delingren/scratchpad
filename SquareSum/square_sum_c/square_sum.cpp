@@ -3,14 +3,20 @@
 #include <set>
 #include <cstdlib>
 #include <chrono>
+#include <cmath>
 
 using namespace std;
 using namespace std::chrono;
 
+bool is_square(int n) {
+    int k = (int) sqrt(n);
+    return k*k == n;
+}
+
 void solve(int size) {
-    set<int> squares;
-    for (int i = 2; i*i < 2*size; i ++)
-        squares.insert(i*i);
+    // set<int> squares;
+    // for (int i = 2; i*i < 2*size; i ++)
+    //     squares.insert(i*i);
 
     int partial_list[size];
     int last_tried[size];
@@ -43,8 +49,11 @@ void solve(int size) {
                 if (used)
                     continue;
 
-                if (squares.end() == squares.find(next + partial_list[current]))
+                if (!is_square(next + partial_list[current]))
                     continue;
+
+                // if (squares.end() == squares.find(next + partial_list[current]))
+                //     continue;
 
                 last_tried[current] = next;
                 current ++;
