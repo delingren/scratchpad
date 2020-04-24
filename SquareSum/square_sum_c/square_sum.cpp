@@ -13,13 +13,13 @@ bool is_square(int n) {
     return k*k == n;
 }
 
+// Rearrange 1..size such that any two adjacent numbers add to a square number
 void solve(int size) {
-    // set<int> squares;
-    // for (int i = 2; i*i < 2*size; i ++)
-    //     squares.insert(i*i);
-
+    // Already arranged numbers
     int partial_list[size];
+    // Last tried number to be appended after each position, for backtracking
     int last_tried[size];
+    // Current tail of already arranged numbers
     int current;
 
     for (int i = 1; i <= size; i ++) {
@@ -35,7 +35,7 @@ void solve(int size) {
                 return;
             }
 
-            // Find next possible number to append to the end of the list, starting 
+            // Find next potential number to append to the end of the list, starting 
             // from one above the last number tried
             int next;
             for (next = last_tried[current] + 1; next <= size; next ++) {
@@ -51,9 +51,6 @@ void solve(int size) {
 
                 if (!is_square(next + partial_list[current]))
                     continue;
-
-                // if (squares.end() == squares.find(next + partial_list[current]))
-                //     continue;
 
                 last_tried[current] = next;
                 current ++;

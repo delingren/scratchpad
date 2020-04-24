@@ -3,14 +3,14 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "C/C++: clang build active file",
+			"label": "clang++ build active file",
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-std=c++17",
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}.out"
+				"${fileDirname}/${fileBasenameNoExtension}"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
