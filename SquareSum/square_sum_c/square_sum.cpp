@@ -2,8 +2,10 @@
 #include <iterator>
 #include <set>
 #include <cstdlib>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 void solve(int size) {
     set<int> squares;
@@ -60,6 +62,11 @@ void solve(int size) {
 
 int main(int argc, char* argv[]) {
     int size = atoi(argv[1]);
-    solve(size);
+    time_point start = high_resolution_clock::now(); 
+    for (int i = 0; i < 10; i ++)
+        solve(size);
+    time_point stop = high_resolution_clock::now();
+    microseconds duration = duration_cast<microseconds>(stop - start); 
+    cout << "Time: " << duration.count() << " microseconds" << endl; 
     return 0;
 }
