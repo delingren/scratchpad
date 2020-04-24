@@ -72,8 +72,7 @@ void solve(int size) {
 int main(int argc, char* argv[]) {
     int size = atoi(argv[1]);
     time_point start = high_resolution_clock::now(); 
-    for (int i = 0; i < 10; i ++)
-        solve(size);
+    solve(size);
     time_point stop = high_resolution_clock::now();
     microseconds duration = duration_cast<microseconds>(stop - start); 
     cout << "Time: " << duration.count() << " microseconds" << endl; 
