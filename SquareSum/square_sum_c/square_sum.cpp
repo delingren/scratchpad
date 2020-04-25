@@ -22,9 +22,16 @@ void solve(int size) {
     // Current tail of already arranged numbers
     int current;
 
+    // Bitset for remembering already used numbers
+    bool used[size + 1]; 
+
     for (int i = 1; i <= size; i ++) {
+        for (int k = 1; k <= size; k ++)
+            used[k] = false;
+
         current = 0;
         partial_list[current] = i;
+        used[i] = true;
         last_tried[current] = 0;
 
         while (current >= 0) {
@@ -39,14 +46,16 @@ void solve(int size) {
             // from one above the last number tried
             int next;
             for (next = last_tried[current] + 1; next <= size; next ++) {
-                bool used = false;
-                for (int i = 0; i <= current; i ++) {
-                    if (partial_list[i] == next) {
-                        used = true;
-                        break;
-                    }
-                }
-                if (used)
+                // bool used = false;
+                // for (int i = 0; i <= current; i ++) {
+                //     if (partial_list[i] == next) {
+                //         used = true;
+                //         break;
+                //     }
+                // }
+                // if (used)
+                //     continue;
+                if (used[next])
                     continue;
 
                 if (!is_square(next + partial_list[current]))
@@ -56,12 +65,15 @@ void solve(int size) {
                 current ++;
                 partial_list[current] = next;
                 last_tried[current] = 0;
+                used[next] = true;
                 break;
 
                 next ++;
             }
-            if (next > size)
+            if (next > size) {
+                used[partial_list[current]] = false;
                 current --;
+            }
         }
     }
 }
