@@ -109,4 +109,5 @@ void readEncoder() {
 void loop() {
   readMatrix();
   readEncoder();
+  delay(50);
 }
