@@ -10,9 +10,9 @@ const int colCount = sizeof(colPins) / sizeof(colPins[0]);
 byte statusMatrix[rowCount][colCount];
 
 KeyboardKeycode keyKeycodes[rowCount][colCount] = {
-  {KEY_MUTE, KEY_ENTER, KEY_RESERVED},
-  {KEY_HOME, KEY_UP, KEY_END},
-  {KEY_LEFT, KEY_DOWN, KEY_RIGHT},
+  {KEY_MUTE, KEY_ESC, KEY_RESERVED},
+  {KEY_F7, KEY_F8, KEY_F9},
+  {KEY_F10, KEY_F11, KEY_F12},
 };
 
 Encoder encoder(2, 3);
